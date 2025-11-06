@@ -39,6 +39,7 @@ const App = () => {
         <PokemonPage pokemonList={pokemonList} previous={previous} next={next} />
       } />
     </Routes>
+    adas
   )
 }
 
