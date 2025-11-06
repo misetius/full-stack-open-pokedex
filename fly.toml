@@ -29,7 +29,7 @@ primary_region = 'arn'
   timeout = "5s"
   path = "/health"
 
-  [deploy]
+[deploy]
   strategy = "rolling"
 
 [[vm]]
