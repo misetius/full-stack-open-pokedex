@@ -1,6 +1,6 @@
 dist/
 node_modules/
-
+token.txt
 # Playwright
 /test-results/
 /playwright-report/
