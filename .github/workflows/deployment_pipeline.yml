@@ -26,3 +26,17 @@ jobs:
         run: npx playwright install --with-deps
       - name: run e2e-tests
         run: npm run test:e2e
+
+  tag_release:
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: '0'  
+      - name: bump it up
+        uses: anothrNick/github-tag-action@1.75.0
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          if: ${{ github.event_name == 'push' }}
+          DEFAULT_BUMP: major
