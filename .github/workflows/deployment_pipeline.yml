@@ -9,6 +9,8 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
@@ -31,7 +33,7 @@ jobs:
   tag_release:
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-latest
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ (github.event_name == 'push') && !contains(github.event.head_commit.message, '#skip')}}
       steps:
       - uses: actions/checkout@v4
         with: 
@@ -56,4 +58,4 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-          DEFAULT_BUMP: major
+          DEFAULT_BUMP: patch

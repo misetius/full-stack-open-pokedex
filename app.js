@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 
 })
 
-app.listen(PORT+1, () => {
+app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`)
   console.log('sssss')
   console.log('testing')
