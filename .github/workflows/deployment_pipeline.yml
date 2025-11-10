@@ -17,6 +17,7 @@ jobs:
     concurrency: deploy-group
     env:
       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}  
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
     steps:
         
       - uses: actions/checkout@v4
@@ -46,14 +47,14 @@ jobs:
         uses: rjstone/discord-webhook-notify@v2
         if: success()
         with:
-         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+         webhookUrl: ${{ env.DISCORD_WEBHOOK }}
          severity: info
          text: new version of Pokedex deployed
       - name: Test not successful
         uses: rjstone/discord-webhook-notify@v2
         if: failure()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhookUrl: ${{ env.DISCORD_WEBHOOK }}
           severity: error
           text: nuld failed
          
