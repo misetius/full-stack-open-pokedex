@@ -60,7 +60,7 @@ jobs:
          nodetail: true
          status: ${{ job.status }}
          content: Build failed
-         description: commit ${{github.sha}} broke the build
+         description: commit https://github.com/misetius/full-stack-open-pokedex/commit/${{github.sha}} broke the build
          
   
 
