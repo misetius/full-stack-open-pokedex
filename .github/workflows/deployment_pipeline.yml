@@ -9,6 +9,8 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+  schedule: 
+    - cron: "0 0 * * *"
 
 
 jobs:
@@ -94,3 +96,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_PREFIX: v
           DEFAULT_BUMP: patch
+  
+  url_health_check:
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-latest
+      steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://full-stack-open-pokedex-dark-mountain-6369.fly.dev/
+          follow-redirect: false 
+          max-attempts: 3 
+          retry-delay: 5s 
+          retry-all: false 
+
