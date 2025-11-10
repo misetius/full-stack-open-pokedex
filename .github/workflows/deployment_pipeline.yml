@@ -56,7 +56,7 @@ jobs:
         with:
           webhookUrl: ${{ env.DISCORD_WEBHOOK }}
           severity: error
-          text: nuld failed
+          text: build failed
          
   
 
