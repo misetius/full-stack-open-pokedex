@@ -44,19 +44,22 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}   
       - run: flyctl deploy --remote-only   
       - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: sarisia/actions-status-discord@v1
         if: success()
         with:
-         webhookUrl: ${{ env.DISCORD_WEBHOOK }}
-         severity: info
-         text: new version of Pokedex deployed
+         webhook: ${{ env.DISCORD_WEBHOOK }}
+         nodetail: true
+         status: ${{ job.status }}
+         description: to https://full-stack-open-pokedex-dark-mountain-6369.fly.dev/ by ${{github.actor}}
+         content: New version of Pokedex deployed
       - name: Test not successful
-        uses: rjstone/discord-webhook-notify@v1
+        uses: sarisia/actions-status-discord@v1
         if: failure()
         with:
-          webhookUrl: ${{ env.DISCORD_WEBHOOK }}
-          severity: error
-          text: build failed
+         webhook: ${{ env.DISCORD_WEBHOOK }}
+         nodetail: true
+         status: ${{ job.status }}
+         content: Build failed
          
   
 
